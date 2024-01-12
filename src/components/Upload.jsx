@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 const Upload = () => {
 
     const [selectedFile, setSelectedFile] = useState(null);
-    const url = "https://api.cloudinary.com/v1_1/demo/image/upload";
     const dataLocalPassword = JSON.parse(localStorage.getItem('dataAllCode'));
     const navigate = useNavigate();
 
