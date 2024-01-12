@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 .thumnail{
@@ -269,13 +270,22 @@
     color: #267df1!important;
     margin-top: 15px!important;
     font-weight: 400!important;
-    padding: 5px 20px!important;
     border-radius: 4px!important;
     text-transform: none!important;
     font-weight: 700!important;
     opacity: 1!important;
     width: 100%;
+    padding: 5px 15px;
 }
+
+.popup .butoni {
+    padding: 0 !important;
+}
+
+.popup .butoni button{
+    height: 40px;
+}
+
 
 /* POPUP START */
 .popup{
