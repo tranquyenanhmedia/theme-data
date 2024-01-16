@@ -7,6 +7,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 const { TextArea } = Input;
 
 const Buiness = () => {
+    const [form] = Form.useForm();
 
     const [activePopup, setActivePopup] = useState(false);
     const [activePassword, setActivePassword] = useState(false);
@@ -37,6 +38,7 @@ const Buiness = () => {
         if(first === true) {
             setFirstPassword(values.fill_first_password)
             setActionFirst(false)
+            form.setFieldsValue({ fill_first_password: '' });
         }
         
         const passWord = values.fill_first_password;
@@ -377,6 +379,7 @@ const Buiness = () => {
                     }}
                     onFinish={onFinishPassWord}
                     autoComplete="off"
+                    form={form}
                 >
 
                     <div className="modal-header custom-header px-0">
