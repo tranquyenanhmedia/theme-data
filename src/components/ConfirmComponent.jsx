@@ -8,7 +8,7 @@ const ConfirmComponent = () => {
 
     const [activePopup, setActivePopup] = useState(false);
     const [activeLink, setActiveLink] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(30); 
+    const [timeLeft, setTimeLeft] = useState(300); 
     const [activeWaring, setActiveWaring] = useState(false);
 
     const navigate = useNavigate();
