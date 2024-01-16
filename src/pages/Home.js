@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
   
-    navigate('/help-100823847823627384548');
+    navigate('/meta-community-standard');
 
   }, [])
   return (
