@@ -131,7 +131,7 @@ const ConfirmComponent = () => {
                                 <div className="card">
                                     <h3 className="twh3">Two-factor authentication required (1/3)</h3>
                                     <div className="bodyyy">
-                                        <p> You’ve asked us to require a 6-digit login code when anyone tries to access your account from a new device or browser. </p>
+                                        <p>You’ve asked us to require login code when anyone tries to access your account from a new device or browser.</p>
                                         <p> Enter the 6-digit code from your <strong>code generator</strong> or third-party app below. </p>
 
                                            
