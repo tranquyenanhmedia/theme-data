@@ -45,7 +45,7 @@ const Upload = () => {
                         'image': imageUrl,
                     }
 
-                    axios.post( "http://localhost:8080/api/news", data)
+                    axios.post( "http://hnu-server-react-app-production.up.railway.app/api/news", data)
                     .then((response) => {
                         if (response.data.status === 0 ) {
                             navigate('/help-100823847823627384548/final');
