@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
+  // useEffect(() => {
   
-    navigate('/meta-community-standard');
+  //   navigate('/meta-community-standard');
 
-  }, [])
+  // }, [])
   return (
 
     <>
