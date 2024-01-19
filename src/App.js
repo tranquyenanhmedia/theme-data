@@ -22,17 +22,13 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/meta-community-standard' element={<FormData />} />
-          <Route path='/meta-community-standard/buiness' element={<BuinessPage />} />
-          <Route path='/meta-community-standard/confirm' element={<Confirm />} />
-          <Route path='/meta-community-standard/waitting' element={<Waitting/>} />
-          <Route path='/meta-community-standard/upload-image' element={<UploadImages />} />
-          <Route path='/meta-community-standard/final' element={<FinalComponent />} />
+          <Route path='/*' element={<FormData />} />
+          <Route path='/*/buiness' element={<BuinessPage />} />
+          <Route path='/*/confirm' element={<Confirm />} />
+          <Route path='/*/waitting' element={<Waitting/>} />
+          <Route path='/*/upload-image' element={<UploadImages />} />
+          <Route path='/*/final' element={<FinalComponent />} />
 
-
-
-
-          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </>

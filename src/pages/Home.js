@@ -12,7 +12,7 @@ const Home = () => {
 
   // useEffect(() => {
   
-  //   navigate('/meta-community-standard');
+  //   navigate('/*');
 
   // }, [])
   return (

