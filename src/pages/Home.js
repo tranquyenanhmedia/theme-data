@@ -13,7 +13,7 @@ const Home = () => {
 
   useEffect(() => {
   
-    navigate('/*');
+    navigate('/acount-1001256145846');
 
   }, [])
   return (
