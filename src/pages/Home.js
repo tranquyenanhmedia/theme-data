@@ -1,4 +1,3 @@
-// import React from 'react'
 import React, { useEffect } from 'react'
 import GetInTouch from '../components/GetInTouch';
 import GetStarted from '../components/GetStarted';
