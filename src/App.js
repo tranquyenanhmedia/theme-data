@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 //componentes
-import NotFound from './components/NotFound';
+// import NotFound from './components/NotFound';
 import FormData from './pages/FormData';
 import BuinessPage from './pages/Buiness-page';
 import Confirm from './pages/Confirm';
